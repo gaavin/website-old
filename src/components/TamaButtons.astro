@@ -1,0 +1,22 @@
+<div id="controls">
+  <button id="btnA" onclick="sendCommand('A')">A</button>
+  <button id="btnB" onclick="sendCommand('B')">B</button>
+  <button id="btnC" onclick="sendCommand('C')">C</button>
+</div>
+
+<script type="module">
+  window.sendCommand = function (command) {
+    fetch("/api/command", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ command }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json(); // Parse the JSON response
+      })
+      .catch((error) => console.error("Error:", error));
+  };
+</script>

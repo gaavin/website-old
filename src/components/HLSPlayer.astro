@@ -1,0 +1,24 @@
+<div id="video-container">
+  <video id="video" controls autoplay></video>
+</div>
+
+<script type="module">
+  // Load Hls from the CDN
+  const script = document.createElement("script");
+  script.src = "https://cdn.jsdelivr.net/npm/hls.js@latest";
+  document.head.appendChild(script);
+
+  script.onload = () => {
+    const Hls = window.Hls;
+    const video = document.getElementById("video");
+    const videoSrc = "/placeholder.m3u8"; // Placeholder for your HLS video source
+    if (Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(videoSrc);
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        video.play();
+      });
+    }
+  };
+</script>
