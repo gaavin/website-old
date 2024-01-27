@@ -1,7 +1,11 @@
-// src/pages/api/events.ts
 import type { APIRoute } from "astro";
 
-let clients: { id: number; controller: ReadableStreamDefaultController }[] = [];
+interface Client {
+  id: number;
+  controller: ReadableStreamDefaultController;
+}
+
+let clients: Client[] = [];
 
 export const GET: APIRoute = async ({ request }) => {
   const headers = {
@@ -15,7 +19,6 @@ export const GET: APIRoute = async ({ request }) => {
       const clientId = Date.now();
       clients.push({ id: clientId, controller });
 
-      // Send a keep-alive comment to avoid timeout
       const keepAliveInterval = setInterval(() => {
         controller.enqueue(":keepalive\n\n");
       }, 15000);
@@ -31,9 +34,8 @@ export const GET: APIRoute = async ({ request }) => {
   return new Response(stream, { headers });
 };
 
-// Function to broadcast a message to all clients
 export function broadcastMessage(message: string) {
-  clients.forEach(({ controller }) => {
-    controller.enqueue(`data: ${JSON.stringify(message)}\n\n`);
+  clients.forEach((client) => {
+    client.controller.enqueue(`data: ${JSON.stringify(message)}\n\n`);
   });
 }
