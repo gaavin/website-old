@@ -1,34 +1,43 @@
+// src/scripts/makeDraggable.ts
+
 export default function makeDraggable(element: HTMLElement): void {
-  let posX: number = 0,
-    posY: number = 0,
-    posInitial: number = 0,
-    posFinal: number = 0;
+  let isDragging = false;
+  let dragStartX = 0;
+  let dragStartY = 0;
+  let origX = 0;
+  let origY = 0;
+  let deltaX = 0;
+  let deltaY = 0;
 
-  // Mouse Events
-  element.onmousedown = dragMouseDown;
+  element.addEventListener("mousedown", (event: MouseEvent) => {
+    event.preventDefault();
+    isDragging = true;
+    dragStartX = event.clientX;
+    dragStartY = event.clientY;
+    origX = element.offsetLeft;
+    origY = element.offsetTop;
 
-  function dragMouseDown(e: MouseEvent) {
-    e.preventDefault();
-    posInitial = e.clientX;
-    document.onmouseup = closeDragElement;
-    document.onmousemove = elementDrag;
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
+    element.style.cursor = "grabbing";
+  });
+
+  function onMouseMove(event: MouseEvent) {
+    if (!isDragging) return;
+    deltaX = event.clientX - dragStartX;
+    deltaY = event.clientY - dragStartY;
+
+    element.style.left = origX + deltaX + "px";
+    element.style.top = origY + deltaY + "px";
   }
 
-  function elementDrag(e: MouseEvent) {
-    e.preventDefault();
-    // Calculate the new cursor position:
-    posX = posInitial - e.clientX;
-    posInitial = e.clientX;
-    posY = posFinal - e.clientY;
-    posFinal = e.clientY;
-    // Set the element's new position:
-    element.style.top = element.offsetTop - posY + "px";
-    element.style.left = element.offsetLeft - posX + "px";
+  function onMouseUp() {
+    isDragging = false;
+    document.removeEventListener("mousemove", onMouseMove);
+    document.removeEventListener("mouseup", onMouseUp);
+    element.style.cursor = "grab";
   }
 
-  function closeDragElement() {
-    // Stop moving when mouse button is released:
-    document.onmouseup = null;
-    document.onmousemove = null;
-  }
+  // Prevent the default drag behavior of image and link elements
+  element.ondragstart = () => false;
 }

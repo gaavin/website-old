@@ -2,23 +2,22 @@ import makeDraggable from "./makeDraggable";
 import sendCommand from "./sendCommand";
 
 export default function initializeTama(): void {
-  // Wait for the DOM content to be fully loaded
-  window.addEventListener("DOMContentLoaded", () => {
-    const tamaContainer = document.getElementById("tama-container");
+  const tamaContainer = document.querySelector(".tama-container");
 
-    // Initialize the draggable functionality
-    if (tamaContainer) {
-      makeDraggable(tamaContainer);
-    }
+  if (tamaContainer instanceof HTMLElement) {
+    makeDraggable(tamaContainer);
+  } else {
+    console.error("tamaContainer is not an HTMLElement");
+  }
 
-    document
-      .getElementById("btnA")
-      ?.addEventListener("click", () => sendCommand("A"));
-    document
-      .getElementById("btnB")
-      ?.addEventListener("click", () => sendCommand("B"));
-    document
-      .getElementById("btnC")
-      ?.addEventListener("click", () => sendCommand("C"));
-  });
+  // Attach click event listeners to buttons
+  document
+    .getElementById("btnA")
+    ?.addEventListener("click", () => sendCommand("A"));
+  document
+    .getElementById("btnB")
+    ?.addEventListener("click", () => sendCommand("B"));
+  document
+    .getElementById("btnC")
+    ?.addEventListener("click", () => sendCommand("C"));
 }

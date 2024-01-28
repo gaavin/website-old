@@ -1,14 +1,13 @@
 ---
-import Tama from "../components/Tama.astro";
+import { Tama } from "../components/Tama.tsx";
+import { SSEListener } from "../components/SSEClient.tsx";
 ---
 
 <html>
-  <head>
-    <!-- head content -->
-  </head>
+  <head> </head>
   <body>
+    <SSEListener />
     <Tama />
     <slot />
-    <!-- This is where page-specific content will go -->
   </body>
 </html>
