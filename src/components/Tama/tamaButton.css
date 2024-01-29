@@ -1,0 +1,16 @@
+.tama-button {
+  background-color: blue; /* Default background color */
+  color: white;
+  border: 2px solid transparent; /* Adjust border as needed */
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: transform 0.1s, background-color 0.1s; /* Animate both transform and background-color */
+}
+
+.tama-button.pressed {
+  transform: scale(0.8); /* More pronounced scale effect */
+  background-color: red; /* Change color to red when pressed */
+}

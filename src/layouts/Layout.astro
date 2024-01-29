@@ -1,13 +1,11 @@
 ---
-import { Tama } from "../components/Tama.tsx";
-import { SSEListener } from "../components/SSEClient.tsx";
+import { Tama } from "../components/Tama/Tama.tsx";
 ---
 
 <html>
   <head> </head>
   <body>
-    <SSEListener />
-    <Tama />
+    <Tama client:idle />
     <slot />
   </body>
 </html>

@@ -1,11 +1,9 @@
 import type { APIRoute } from "astro";
 
-interface Client {
-  id: number;
+let clients: {
+  id: string;
   controller: ReadableStreamDefaultController;
-}
-
-let clients: Client[] = [];
+}[] = [];
 
 export const GET: APIRoute = async ({ request }) => {
   const headers = {
@@ -16,7 +14,7 @@ export const GET: APIRoute = async ({ request }) => {
 
   const stream = new ReadableStream({
     start(controller) {
-      const clientId = Date.now();
+      const clientId = crypto.randomUUID();
       clients.push({ id: clientId, controller });
 
       const keepAliveInterval = setInterval(() => {
