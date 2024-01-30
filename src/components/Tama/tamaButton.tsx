@@ -7,7 +7,6 @@ export const TamaButton = ({ command }: { command: "A" | "B" | "C" }) => {
   const message = useSSEListener();
 
   useEffect(() => {
-    console.log(`asdasd: ${message}`);
     if (message === `${command}-press`) {
       setIsPressed(true);
     }

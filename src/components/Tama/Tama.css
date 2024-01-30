@@ -1,7 +1,7 @@
 /* Tama.css */
 .tama-container {
   position: relative;
-  width: 200px; /* Adjust to the width of the Tamagotchi */
+  width: 230px; /* Adjust to the width of the Tamagotchi */
   height: 300px; /* Adjust to the height of the Tamagotchi */
   margin: auto; /* Center the container */
   border-radius: 50%; /* Gives the round shape */
@@ -10,17 +10,16 @@
 }
 
 .stream-container {
-  position: relative;
-  width: 100%;
+  width: 100%; /* Make the stream fill the container */
   height: 100%; /* Ensure the container takes the full height */
   overflow: hidden; /* Hide overflow to maintain the Tamagotchi shape */
 }
 
 .buttons-container {
   position: absolute;
-  bottom: 10px; /* Adjust to place the buttons at the bottom of the Tamagotchi */
-  left: 0;
-  right: 0;
+  bottom: 20px; /* Adjust to place the buttons at the bottom of the Tamagotchi */
+  left: 50px;
+  right: 50px;
   display: flex;
   justify-content: space-around; /* Distributes buttons evenly */
   pointer-events: none; /* Allows clicks to pass through to the video */
