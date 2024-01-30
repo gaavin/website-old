@@ -12,7 +12,7 @@ RUN npm install
 COPY . .
 
 # Build the project using the Astro build command
-RUN npm run astro build
+RUN npm run build
 
 # Serve stage
 FROM node:current-slim AS serve
