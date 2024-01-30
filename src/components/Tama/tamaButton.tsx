@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { sendCommand } from "./sendCommand";
 import { useSSEListener } from "../SSEListener";
-import "./TamaButton.css";
 
-const TamaButton = ({ command }: { command: "A" | "B" | "C" }) => {
+export const TamaButton = ({ command }: { command: "A" | "B" | "C" }) => {
   const [isPressed, setIsPressed] = useState(false);
   const message = useSSEListener();
 
@@ -31,5 +30,3 @@ const TamaButton = ({ command }: { command: "A" | "B" | "C" }) => {
     </button>
   );
 };
-
-export default TamaButton;

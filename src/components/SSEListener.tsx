@@ -1,14 +1,11 @@
-import React, { createContext, useEffect, useState } from "react";
+import { useState, useEffect, createContext, useContext } from "react";
 
 const SSEContext = createContext<string | null | undefined>(undefined);
 
-export const SSEListener = ({
-  children,
-  endpoint,
-}: {
+export const SSEListener: React.FC<{
   children: React.ReactNode;
   endpoint: string;
-}) => {
+}> = ({ children, endpoint }) => {
   const [message, setMessage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -34,7 +31,7 @@ export const SSEListener = ({
 };
 
 export const useSSEListener = () => {
-  const context = React.useContext(SSEContext);
+  const context = useContext(SSEContext);
 
   if (context === undefined) {
     throw new Error("useSSEListener must be used within a SSEListener");
