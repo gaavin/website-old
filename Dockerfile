@@ -29,4 +29,4 @@ COPY --from=build /usr/src/app/dist ./dist
 CMD ["node", "./dist/server/entry.mjs"]
 
 # Inform Docker that the container listens on port 3000
-EXPOSE 3000
+EXPOSE 4321
