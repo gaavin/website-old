@@ -11,4 +11,8 @@ export default defineConfig({
   adapter: node({
     mode: "standalone",
   }),
+  prerender: {
+    all: true,
+    exclude: ["/api/events"],
+  },
 });
