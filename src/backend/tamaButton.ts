@@ -1,4 +1,3 @@
-import { setTimeout } from "global";
 import { broadcastMessage } from "../pages/api/events";
 
 type Button = "A" | "B" | "C";
@@ -12,7 +11,7 @@ const buttons: Buttons = {
 };
 
 export const buttonPress = (button: Button) => {
-  const timer = setTimeout(() => {
+  const timer = +setTimeout(() => {
     buttons[button] = null;
     broadcastMessage(`${button}-release`);
   }, 500);
