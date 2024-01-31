@@ -29,3 +29,4 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ghcr.io/gaavin/website:latest
+          platforms: linux/arm64
