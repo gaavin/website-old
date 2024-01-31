@@ -1,3 +1,4 @@
+import { setTimeout } from "global";
 import { broadcastMessage } from "../pages/api/events";
 
 type Button = "A" | "B" | "C";
