@@ -19,7 +19,8 @@ export const GET: APIRoute = async ({ request }) => {
       clients.push({ id: clientId, controller });
 
       const keepAliveInterval = setInterval(() => {
-        controller.enqueue(":keepalive\n\n");
+        const keepAliveMessage = new TextEncoder().encode(":keepalive\n\n");
+        controller.enqueue(keepAliveMessage);
       }, 15000);
 
       request.signal.addEventListener("abort", () => {
@@ -35,6 +36,9 @@ export const GET: APIRoute = async ({ request }) => {
 
 export function broadcastMessage(message: string) {
   clients.forEach((client) => {
-    client.controller.enqueue(`data: ${JSON.stringify(message)}\n\n`);
+    const messageBuffer = new TextEncoder().encode(
+      `data: ${JSON.stringify(message)}\n\n`
+    );
+    client.controller.enqueue(messageBuffer);
   });
 }
