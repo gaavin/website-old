@@ -1,6 +1,9 @@
 import type { APIRoute } from "astro";
 import { randomUUID } from "crypto";
 
+// opt out of prerendering
+export const prerender = false;
+
 let clients: {
   id: string;
   controller: ReadableStreamDefaultController;
