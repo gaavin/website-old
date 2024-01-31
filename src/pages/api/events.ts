@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+import { randomUUID } from "crypto";
 
 let clients: {
   id: string;
@@ -14,7 +15,7 @@ export const GET: APIRoute = async ({ request }) => {
 
   const stream = new ReadableStream({
     start(controller) {
-      const clientId = crypto.randomUUID();
+      const clientId = randomUUID();
       clients.push({ id: clientId, controller });
 
       const keepAliveInterval = setInterval(() => {

@@ -24,5 +24,8 @@
     "react-draggable": "^4.4.6",
     "react-player": "^2.14.1",
     "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.13"
   }
 }
