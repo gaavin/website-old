@@ -1,4 +1,5 @@
 import { broadcastMessage } from "../pages/api/events";
+import { tamaTalk } from "./tamaTalk";
 
 type Button = "A" | "B" | "C";
 
@@ -23,4 +24,5 @@ export const buttonPress = (button: Button) => {
   buttons[button] = timer;
 
   broadcastMessage(`${button}-press`);
+  tamaTalk(button);
 };
