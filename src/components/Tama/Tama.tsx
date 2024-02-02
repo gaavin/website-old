@@ -8,6 +8,8 @@ import "./Tama.css";
 export const Tama = () => {
   const [isMuted, setIsMuted] = useState(true);
 
+  const url = new URL(window.location.href);
+
   return (
     <div>
       <button
@@ -29,7 +31,7 @@ export const Tama = () => {
             />
           </div>
           <div className="buttons-container">
-            <SSEListener endpoint="http://localhost:4321/api/events">
+            <SSEListener endpoint={`${url.origin}/api/events`}>
               <TamaButton command="A" />
               <TamaButton command="B" />
               <TamaButton command="C" />
