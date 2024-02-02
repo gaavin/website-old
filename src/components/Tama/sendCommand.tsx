@@ -4,7 +4,7 @@ type Command = {
 
 export async function sendCommand(command: string): Promise<any> {
   try {
-    const response = await fetch("/api/command", {
+    const response = await fetch(`/api/command`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ command } as Command),

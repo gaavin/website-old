@@ -29,7 +29,7 @@ export const Tama = () => {
             />
           </div>
           <div className="buttons-container">
-            <SSEListener endpoint={`https://www.maxp.xyz/api/events`}>
+            <SSEListener endpoint={"/api/events"}>
               <TamaButton command="A" />
               <TamaButton command="B" />
               <TamaButton command="C" />
