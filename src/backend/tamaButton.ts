@@ -1,6 +1,9 @@
 import { broadcastMessage } from "../pages/api/events";
 import { tamaTalk } from "./tamaTalk";
 
+// opt out of prerendering
+export const prerender = false;
+
 type Button = "A" | "B" | "C";
 
 type Buttons = Record<Button, number | null>;

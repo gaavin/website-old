@@ -1,5 +1,8 @@
 import { useState, useEffect, createContext, useContext } from "react";
 
+// opt out of prerendering
+export const prerender = false;
+
 const SSEContext = createContext<string | null | undefined>(undefined);
 
 export const SSEListener: React.FC<{

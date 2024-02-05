@@ -1,3 +1,6 @@
+// opt out of prerendering
+export const prerender = false;
+
 type Command = {
   command: string;
 };
