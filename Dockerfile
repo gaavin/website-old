@@ -25,8 +25,10 @@ COPY --from=build /usr/src/app/package*.json ./
 # Copy the build output from the build stage
 COPY --from=build /usr/src/app/dist ./dist
 
+# Inform Docker that the container listens on port 4321
+ENV HOST=0.0.0.0
+ENV PORT=4321
+EXPOSE 4321
+
 # The command to start your app will depend on how your Node server is set up
 CMD ["node", "./dist/server/entry.mjs"]
-
-# Inform Docker that the container listens on port 3000
-EXPOSE 4321
