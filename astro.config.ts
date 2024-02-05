@@ -3,6 +3,7 @@ import react from "@astrojs/react";
 import node from "@astrojs/node";
 
 export default defineConfig({
+  site: "https://gavinpower.dev",
   output: "hybrid",
   integrations: [react()],
   adapter: node({
