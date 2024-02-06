@@ -30,6 +30,6 @@ export async function tamaTalk(command: string) {
     const data = await response.json();
     console.log("Success:", data.message);
   } catch (error) {
-    console.error("Error sending command to server:", error);
+    console.error("Error sending command to tama:", error);
   }
 }
