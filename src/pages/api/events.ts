@@ -7,7 +7,6 @@ export const prerender = false;
 let clients: {
   id: string;
   controller: ReadableStreamDefaultController;
-  isActive: boolean;
 }[] = [];
 
 export const GET: APIRoute = async ({ request }) => {
@@ -20,22 +19,21 @@ export const GET: APIRoute = async ({ request }) => {
   const stream = new ReadableStream({
     start(controller) {
       const clientId = randomUUID();
-      clients.push({ id: clientId, controller, isActive: true });
+      clients.push({ id: clientId, controller });
 
       const keepAliveInterval = setInterval(() => {
-        const keepAliveMessage = new TextEncoder().encode(":keepalive\n\n");
-        controller.enqueue(keepAliveMessage);
+        // Send keep-alive message only if the client is still connected
+        if (clients.some((client) => client.id === clientId)) {
+          const keepAliveMessage = new TextEncoder().encode(":keepalive\n\n");
+          controller.enqueue(keepAliveMessage);
+        } else {
+          clearInterval(keepAliveInterval); // Clear interval if client is not found
+        }
       }, 15000);
 
       request.signal.addEventListener("abort", () => {
-        clearInterval(keepAliveInterval);
-        const clientIndex = clients.findIndex(
-          (client) => client.id === clientId
-        );
-        if (clientIndex !== -1) {
-          clients[clientIndex].isActive = false; // Set isActive flag to false
-          clients.splice(clientIndex, 1);
-        }
+        clearInterval(keepAliveInterval); // Clear interval when client disconnects
+        clients = clients.filter((client) => client.id !== clientId); // Remove client from the list
         controller.close();
       });
     },
@@ -46,20 +44,23 @@ export const GET: APIRoute = async ({ request }) => {
 
 export function broadcastMessage(message: string) {
   clients.forEach((client) => {
-    if (client.isActive) {
-      // Check if the client is active
-      const messageBuffer = new TextEncoder().encode(
-        `data: ${JSON.stringify(message)}\n\n`
-      );
-      try {
-        client.controller.enqueue(messageBuffer);
-      } catch (error) {
-        if ((error as NodeJS.ErrnoException).code === "ERR_INVALID_STATE") {
-          // Handle the case where the stream is closed unexpectedly
-          client.isActive = false;
-        } else {
-          throw error; // Re-throw the error if it's not related to invalid state
-        }
+    const messageBuffer = new TextEncoder().encode(
+      `data: ${JSON.stringify(message)}\n\n`
+    );
+    try {
+      client.controller.enqueue(messageBuffer);
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        error.name === "TypeError" &&
+        error.message.includes("Controller is already closed")
+      ) {
+        // Handle the specific case where the stream is closed unexpectedly
+        // Remove the client from the clients array as the stream is closed
+        clients = clients.filter((c) => c.id !== client.id);
+      } else {
+        // Re-throw the error if it's not the specific 'Controller is already closed' error
+        throw error;
       }
     }
   });
