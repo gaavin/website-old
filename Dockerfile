@@ -1,34 +1,25 @@
-# Build stage
-FROM node:current-slim AS build
-WORKDIR /usr/src/app
+FROM node:lts-alpine AS base
+WORKDIR /app
 
-# Copy package.json and package-lock.json (or yarn.lock) files
-COPY package*.json ./
+# By copying only the package.json and package-lock.json here, we ensure that the following `-deps` steps are independent of the source code.
+# Therefore, the `-deps` steps will be skipped if only the source code changes.
+COPY package.json package-lock.json ./
 
-# Install dependencies
-RUN npm install
+FROM base AS prod-deps
+RUN npm install --production
 
-# Copy the rest of your app's source code from your host to your image filesystem
+FROM base AS build-deps
+RUN npm install --production=false
+
+FROM build-deps AS build
 COPY . .
-
-# Build the project using the Astro build command
 RUN npm run build
 
-# Serve stage
-FROM node:current-slim AS serve
-WORKDIR /usr/src/app
+FROM base AS runtime
+COPY --from=prod-deps /app/node_modules ./node_modules
+COPY --from=build /app/dist ./dist
 
-# Copy over the production dependencies from the build stage
-COPY --from=build /usr/src/app/node_modules ./node_modules
-COPY --from=build /usr/src/app/package*.json ./
-
-# Copy the build output from the build stage
-COPY --from=build /usr/src/app/dist ./dist
-
-# Inform Docker that the container listens on port 4321
 ENV HOST=0.0.0.0
 ENV PORT=4321
 EXPOSE 4321
-
-# The command to start your app will depend on how your Node server is set up
-CMD ["node", "./dist/server/entry.mjs"]
+CMD node ./dist/server/entry.mjs
