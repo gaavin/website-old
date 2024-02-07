@@ -1,14 +1,40 @@
 ---
+import { Navigation } from "@/components/Navigation";
 import { Tama } from "../components/Tama/Tama.tsx";
 import "@/styles/globals.css";
 ---
 
 <html>
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gavin Power</title>
   </head>
   <body>
-    <Tama client:only />
-    <slot />
+    <div class="contain h-full w-full">
+      <div class="sidebar bg-background opacity-50 -z-10">
+        <Navigation />
+      </div>
+      <main><slot /></main>
+      <Tama client:only />
+    </div>
   </body>
 </html>
+
+<style>
+  main {
+    grid-area: 1 / 3 / 2 / 4;
+  }
+
+  .contain {
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-template-columns: 1fr 10em 40em 10em 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+  }
+
+  .sidebar {
+    grid-area: 1 / 2 / 2 / 3;
+  }
+</style>
