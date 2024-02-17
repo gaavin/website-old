@@ -1,6 +1,3 @@
-// opt out of prerendering
-export const prerender = false;
-
 export async function tamaTalk(command: string) {
   const serverUrl = "http://192.168.2.63:5000/listen";
 

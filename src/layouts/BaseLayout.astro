@@ -1,0 +1,43 @@
+---
+import { ViewTransitions } from "astro:transitions";
+import { Tama } from "@/components/Tama/Tama.tsx";
+import Navigation from "@/components/Navigation.astro";
+import "@/styles/globals.css";
+const { title } = Astro.props;
+---
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <ViewTransitions />
+  </head>
+  <body>
+    <div class="parent">
+      <nav class="navigation"><Navigation /></nav>
+    </div>
+    <Tama client:only="react" transition:persist />
+    <style>
+      .parent {
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+        grid-template-rows: 50px 1fr;
+        grid-template-areas:
+          "sidebar header"
+          "sidebar main";
+        gap: 16px;
+      }
+      .navigation {
+        grid-area: "sidebar";
+      }
+      .child {
+        grid-area: "main";
+      }
+      .footer {
+        grid-column: 1 / -1;
+        grid-row: -1;
+      }
+    </style>
+  </body>
+</html>

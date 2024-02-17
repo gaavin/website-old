@@ -1,9 +1,6 @@
 import type { APIRoute } from "astro";
 import { buttonPress } from "../../backend/tamaButton";
 
-// opt out of prerendering
-export const prerender = false;
-
 export const POST: APIRoute = async ({ request }) => {
   const data = await request.json();
   const command = data.command;

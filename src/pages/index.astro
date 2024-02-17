@@ -1,35 +1,20 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "../layouts/BaseLayout.astro";
 ---
 
-<Layout>
-  <div class="container mx-auto pt-16">
-    <!-- pt-16 to account for the fixed header -->
+<Layout title="Home Page">
+  <section>
+    <h2>DevBlog</h2>
+    <div>Latest posts...</div>
+  </section>
 
-    <div class="flex flex-wrap -mx-2">
-      <!-- Main content area for blog posts -->
-      <main class="w-full sm:w-2/3 md:w-3/4 px-2">
-        <section class="bg-white p-4 rounded shadow">
-          <h2 class="font-bold text-xl mb-4">DevBlog</h2>
-          <div>Latest posts...</div>
-          <!-- Your blog posts go here -->
-        </section>
-      </main>
+  <aside>
+    <section>
+      <h3>GitHub Resume</h3>
+    </section>
 
-      <!-- Sidebar for GitHub resume and projects -->
-      <aside class="w-full sm:w-1/3 md:w-1/4 px-2 mt-4 sm:mt-0">
-        <!-- GitHub Resume Section -->
-        <section class="bg-white p-4 rounded shadow mb-4">
-          <h3 class="font-bold text-lg">GitHub Resume</h3>
-          <!-- Your GitHub resume content goes here -->
-        </section>
-
-        <!-- GitHub Projects Section -->
-        <section class="bg-white p-4 rounded shadow">
-          <h3 class="font-bold text-lg">Projects</h3>
-          <!-- Your GitHub projects go here -->
-        </section>
-      </aside>
-    </div>
-  </div>
+    <section>
+      <h3>Projects</h3>
+    </section>
+  </aside>
 </Layout>
