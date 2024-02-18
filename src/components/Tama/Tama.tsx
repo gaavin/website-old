@@ -3,7 +3,6 @@ import { SSEListener } from "../SSEListener";
 import { TamaButton } from "./tamaButton";
 import ReactPlayer from "react-player";
 import Draggable from "react-draggable";
-import { Button } from "@/components/ui/button";
 
 import "./Tama.css";
 
@@ -13,13 +12,13 @@ export const Tama = () => {
   return (
     <Draggable>
       <div className="tama-container">
-        <Button
+        <button
           onClick={() => {
             setIsMuted(!isMuted);
           }}
         >
           {isMuted ? "Unmute" : "Mute"}
-        </Button>
+        </button>
         <div className="stream-container">
           <ReactPlayer
             //url="https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8"

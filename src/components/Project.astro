@@ -1,0 +1,29 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  title: string;
+  images: {
+    image: ImageMetadata;
+    alt: string;
+  }[];
+}
+
+const { title, images } = Astro.props;
+---
+
+<p>{title}</p>
+<div class="flex gap-2">
+  {
+    images.map(({ image, alt }) => (
+      <Image
+        class="w-48 h-32 object-cover"
+        src={image}
+        alt={alt}
+        loading="lazy"
+        decoding="async"
+      />
+    ))
+  }
+</div>
+<slot />

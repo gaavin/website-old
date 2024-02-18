@@ -1,0 +1,45 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/BaseLayout.astro";
+import felixImage from "@/images/felix.jpeg";
+import Project from "../components/Project.astro";
+---
+
+<Layout title="projects">
+  <div class="flex flex-col gap-2 text-lg">
+    <Project
+      title="Clear Carbon"
+      images={[
+        { image: felixImage, alt: "Felix" },
+        { image: felixImage, alt: "Felix" },
+        { image: felixImage, alt: "Felix" },
+      ]}
+    >
+      <p>
+        Bacon ipsum dolor amet alcatra fatback doner turkey jowl beef corned
+        beef chicken venison pancetta. Brisket beef ribs pig cow, kielbasa
+        frankfurter sausage pork loin capicola bacon landjaeger andouille
+        hamburger. Shoulder ribeye jowl filet mignon short loin sausage. Ribeye
+        fatback buffalo, sirloin shankle turducken capicola frankfurter jerky
+        pastrami drumstick rump kielbasa swine burgdoggen.
+      </p>
+    </Project>
+    <Project
+      title="Tama"
+      images={[
+        { image: felixImage, alt: "Felix" },
+        { image: felixImage, alt: "Felix" },
+        { image: felixImage, alt: "Felix" },
+      ]}
+    >
+      <p>
+        Bacon ipsum dolor amet alcatra fatback doner turkey jowl beef corned
+        beef chicken venison pancetta. Brisket beef ribs pig cow, kielbasa
+        frankfurter sausage pork loin capicola bacon landjaeger andouille
+        hamburger. Shoulder ribeye jowl filet mignon short loin sausage. Ribeye
+        fatback buffalo, sirloin shankle turducken capicola frankfurter jerky
+        pastrami drumstick rump kielbasa swine burgdoggen.
+      </p>
+    </Project>
+  </div>
+</Layout>

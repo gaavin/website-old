@@ -1,0 +1,37 @@
+---
+interface Props {
+  className?: string;
+}
+
+const { className = "" } = Astro.props;
+---
+
+<p class={className}>Good <span id="time">...</span>,</p>
+
+<script>
+  const recalculate = () => {
+    const date = new Date();
+    const hours = date.getHours();
+    let timeOfDay;
+
+    if (hours < 12) {
+      timeOfDay = "morning 🌄";
+    } else if (hours < 18) {
+      timeOfDay = "afternoon 🌞";
+    } else {
+      timeOfDay = "evening 🌌";
+    }
+
+    const time = document.getElementById("time");
+
+    if (time === null) {
+      console.error("Element with id 'time' not found");
+    } else {
+      time.textContent = timeOfDay;
+    }
+  };
+  recalculate();
+  document.addEventListener("astro:after-swap", (ev) => {
+    recalculate();
+  });
+</script>

@@ -2,41 +2,92 @@
 import { ViewTransitions } from "astro:transitions";
 import { Tama } from "@/components/Tama/Tama.tsx";
 import Navigation from "@/components/Navigation.astro";
+import { Image } from "astro:assets";
+import felixImage from "@/images/keyboard cat.jpeg";
 import "@/styles/globals.css";
 const { title } = Astro.props;
 ---
 
-<html>
+<html transition:animate="none">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+    <title>gavinpower - {title}</title>
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     <ViewTransitions />
   </head>
-  <body>
-    <div class="parent">
-      <nav class="navigation"><Navigation /></nav>
+  <body class="bg-sun-200 text-sun-950">
+    <div class="container mx-auto max-w-screen-xl">
+      <Image
+        class="felix"
+        src={felixImage}
+        alt="Felix the realest"
+        loading="lazy"
+        decoding="async"
+        transition:persist
+      />
+      <nav class="sidebar">
+        <Navigation />
+      </nav>
+      <main class="main" transition:animate="slide">
+        <slot />
+      </main>
     </div>
-    <Tama client:only="react" transition:persist />
+    <div class="tama">
+      <Tama client:only="react" transition:persist />
+    </div>
     <style>
-      .parent {
+      :root {
+        font-size: 22px;
+        font-family: Inter, sans-serif;
+        font-feature-settings:
+          "liga" 1,
+          "calt" 1; /* fix for Chrome */
+      }
+
+      @supports (font-variation-settings: normal) {
+        :root {
+          font-family: InterVariable, sans-serif;
+        }
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+      .container {
         display: grid;
-        grid-template-columns: 1fr 4fr;
-        grid-template-rows: 50px 1fr;
+        grid-template-columns: 16rem 1fr;
+        grid-template-rows: 12rem 1fr 20rem;
+        height: 100%;
+        padding: 4rem;
+        gap: 2rem;
+        grid-auto-flow: row;
         grid-template-areas:
-          "sidebar header"
+          "felix main"
+          "sidebar main"
           "sidebar main";
-        gap: 16px;
       }
-      .navigation {
-        grid-area: "sidebar";
+      .felix {
+        grid-area: felix;
+        border-radius: 2%;
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: cover;
       }
-      .child {
-        grid-area: "main";
+      .sidebar {
+        display: flex;
+        justify-content: center;
+        grid-area: sidebar;
       }
-      .footer {
-        grid-column: 1 / -1;
-        grid-row: -1;
+      .main {
+        grid-area: main;
+      }
+      .tama {
+        position: absolute;
+        bottom: 2rem;
+        right: 2rem;
       }
     </style>
   </body>
