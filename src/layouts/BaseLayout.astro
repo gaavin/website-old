@@ -2,8 +2,7 @@
 import { ViewTransitions } from "astro:transitions";
 import { Tama } from "@/components/Tama/Tama.tsx";
 import Navigation from "@/components/Navigation.astro";
-import { Image } from "astro:assets";
-import felixImage from "@/images/keyboard cat.jpeg";
+import Felix from "@/components/Felix/Felix.astro";
 import "@/styles/globals.css";
 const { title } = Astro.props;
 ---
@@ -19,18 +18,11 @@ const { title } = Astro.props;
   </head>
   <body class="bg-sun-200 text-sun-950">
     <div class="container mx-auto max-w-screen-xl">
-      <Image
-        class="felix"
-        src={felixImage}
-        alt="Felix the realest"
-        loading="lazy"
-        decoding="async"
-        transition:persist
-      />
+      <Felix />
       <nav class="sidebar">
         <Navigation />
       </nav>
-      <main class="main" transition:animate="slide">
+      <main class="main" transition:animate="fade">
         <slot />
       </main>
     </div>
@@ -69,13 +61,6 @@ const { title } = Astro.props;
           "sidebar main"
           "sidebar main";
       }
-      .felix {
-        grid-area: felix;
-        border-radius: 2%;
-        max-height: 100%;
-        max-width: 100%;
-        object-fit: cover;
-      }
       .sidebar {
         display: flex;
         justify-content: center;
@@ -88,6 +73,26 @@ const { title } = Astro.props;
         position: absolute;
         bottom: 2rem;
         right: 2rem;
+      }
+
+      @media (max-width: 1400px) {
+        :root {
+          font-size: 18px;
+        }
+        .container {
+          display: flex;
+          flex-direction: column;
+          padding: 1.5rem;
+        }
+
+        .felix {
+          max-height: 30vh;
+          width: 100%;
+        }
+
+        .tama {
+          display: none;
+        }
       }
     </style>
   </body>

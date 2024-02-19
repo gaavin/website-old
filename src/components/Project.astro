@@ -12,12 +12,12 @@ interface Props {
 const { title, images } = Astro.props;
 ---
 
-<p>{title}</p>
+<p class="text-xl text-center">{title}</p>
 <div class="flex gap-2">
   {
     images.map(({ image, alt }) => (
       <Image
-        class="w-48 h-32 object-cover"
+        class="w-48 h-32 object-cover rounded"
         src={image}
         alt={alt}
         loading="lazy"

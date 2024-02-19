@@ -1,0 +1,52 @@
+---
+import { Image } from "astro:assets";
+
+const felixPics: ImageMetadata[] = await Astro.glob("./*.jpeg").then(
+  (files) => {
+    return files.map((file) => file.default);
+  }
+);
+---
+
+{
+  felixPics.map((image) => (
+    <Image
+      class="felix hidden"
+      src={image}
+      alt="Felix the realest"
+      loading="lazy"
+      decoding="async"
+      transition:persist
+    />
+  ))
+}
+
+<script>
+  const felixPics = document.querySelectorAll(".felix");
+  let kurrentKitty = Math.floor(Math.random() * felixPics.length);
+
+  felixPics[kurrentKitty].className = "felix";
+
+  setInterval(() => {
+    felixPics[kurrentKitty].className = "felix hidden";
+    kurrentKitty = (kurrentKitty + 1) % felixPics.length;
+    felixPics[kurrentKitty].className = "felix";
+  }, 15000);
+</script>
+
+<style>
+  .felix {
+    grid-area: felix;
+    border-radius: 2%;
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: 1400px) {
+    .felix {
+      max-height: 30vh;
+      width: 100%;
+    }
+  }
+</style>

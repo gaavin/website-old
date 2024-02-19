@@ -6,7 +6,7 @@ interface Props {
 const { className = "" } = Astro.props;
 ---
 
-<p class={className}>Good <span id="time">...</span>,</p>
+<p class={className}>Good <span id="time">...</span></p>
 
 <script>
   const recalculate = () => {
@@ -14,7 +14,9 @@ const { className = "" } = Astro.props;
     const hours = date.getHours();
     let timeOfDay;
 
-    if (hours < 12) {
+    if (hours < 6) {
+      timeOfDay = "night 🌙";
+    } else if (hours < 12) {
       timeOfDay = "morning 🌄";
     } else if (hours < 18) {
       timeOfDay = "afternoon 🌞";

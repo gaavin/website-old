@@ -24,8 +24,6 @@ export const TamaButton = ({ command }: { command: "A" | "B" | "C" }) => {
     <button
       className={`tama-button ${isPressed ? "pressed" : ""}`}
       onClick={handleClick}
-    >
-      {command}
-    </button>
+    ></button>
   );
 };

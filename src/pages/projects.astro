@@ -1,88 +1,21 @@
 ---
 import Layout from "../layouts/BaseLayout.astro";
-import felixImage from "@/images/felix.jpeg";
-import Project from "../components/Project.astro";
+import ClearCarbon from "../components/Projects/ClearCarbon/ClearCarbon.astro";
+import Tamagotchi from "../components/Projects/Tamagotchi/Tamagotchi.astro";
 ---
 
 <Layout title="projects">
   <div class="flex flex-col gap-2 text-lg">
-    <Project
-      title="Clear Carbon Solutions"
-      images={[
-        { image: felixImage, alt: "Felix" },
-        { image: felixImage, alt: "Felix" },
-        { image: felixImage, alt: "Felix" },
-      ]}
-    >
-      <p>
-        Together with my colleagues Will & Matt we are working to build a
-        platform for businesses/municipalities to keep track of their carbon
-        emissions. Our goal is to provide value to our clients by generating a
-        report "turbo-tax style" using accessible data they already have on
-        hand, then giving feedback on how to reduce their emissions - ultimately
-        reducing operating costs and putting a smile on mother nature's face.
-        Through working with the Genesis Center we've received a great deal of
-        validation and support, and we're excited to get customers on board in
-        the future.
-      </p>
-      <p>
-        My role in the project being the one and only full-stack developer has
-        been quite the learning experience. As my first deep dive into modern
-        web development since 2007, I took the opportunity to learn how the web
-        has evolved, working my way from a flask/jquery frontend with FastAPI
-        backend, to exploring how I can leverage GraphQL for type-safe
-        interoperability between the two, but things got interesting when I
-        started to explore React which I'd like to talk about briefly.
-      </p>
-      <blockquote class="ramble">
-        <p>
-          React seemed to be a fantastic alternative to the HTML/jQuery soup I
-          was scaffolding with, which I knew was unmaintable. I got to work
-          reading through documentation, asking questions (thanks Jack ❤️), and
-          began ported over my existing frontend to a React, with the soon to be
-          underdog React Router to create an SPA (far better than jinja template
-          SSR).
-        </p>
-        <p>
-          At this point I was satisfied with both stacks, with GraphQL covering
-          interoperability using two excellent libraries Tanstack-Query for the
-          frontend and Strawberry putting on the server side of things. This
-          probably should have been good enough, but as my understanding of the
-          React Router grew, I knew I could do better.
-        </p>
-        <p>
-          Remix.js, a superset of React Router which bundles a simple Node SSR
-          server takes routing and applies the concept of hydration. This means
-          that to achieve full-stack data flow, all you have to do is create a
-          loader (or action for data mutation) function which is ran when the
-          router navigates to a new page. I am now quite happy now to be working
-          within a single codebase, and with Remix's continuous evolevement I
-          can't wait to implement all of their new features.
-        </p>
-      </blockquote>
-    </Project>
-    <Project
-      title="Tama"
-      images={[
-        { image: felixImage, alt: "Felix" },
-        { image: felixImage, alt: "Felix" },
-        { image: felixImage, alt: "Felix" },
-      ]}
-    >
-      <p>
-        Bacon ipsum dolor amet alcatra fatback doner turkey jowl beef corned
-        beef chicken venison pancetta. Brisket beef ribs pig cow, kielbasa
-        frankfurter sausage pork loin capicola bacon landjaeger andouille
-        hamburger. Shoulder ribeye jowl filet mignon short loin sausage. Ribeye
-        fatback buffalo, sirloin shankle turducken capicola frankfurter jerky
-        pastrami drumstick rump kielbasa swine burgdoggen.
-      </p>
-    </Project>
+    <Tamagotchi />
+    <ClearCarbon />
   </div>
 </Layout>
 
-<style>
+<style is:global>
   .ramble {
-    background-color: "bg-sun-300";
+    @apply bg-sun-400;
+    border-radius: 1%;
+    padding: 1rem;
+    font-style: italic;
   }
 </style>

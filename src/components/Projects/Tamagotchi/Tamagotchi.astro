@@ -1,0 +1,67 @@
+---
+import Project from "@/components/Project.astro";
+import twitch from "./twitch.jpeg";
+import ogBox from "./og box.jpeg";
+import coolBox from "./cool box.jpeg";
+---
+
+<Project
+  title="Embedded Tamagotchi"
+  images={[
+    { image: ogBox, alt: "The original box" },
+    { image: twitch, alt: "Felix doing his part" },
+    { image: coolBox, alt: "The better box" },
+  ]}
+>
+  <p>
+    Originally intended to be a livestream on <a href="https://www.twitch.tv/"
+      >Twitch.tv</a
+    >, my tamagotchi now lives on my website just for you ❤️. You should feed
+    him, play with him, and love him or he will die.
+  </p>
+  <p>
+    Button presses are sent from your device to this website's commands API
+    route, which then fires off a message to an arduino wired up to the buttons.
+    You can also see other user's button presses through the use of server sent
+    events. Sound is supported via a hacked in headphone jack which feeds into
+    the video stream. Please unmute him.
+  </p>
+
+  <blockquote class="ramble">
+    <p>
+      The idea for this project came to fruition after feeling sorry for the
+      tamagotchi I abandoned, poor little guy laying on my desk all alone.. dead
+      :(. With a spark of inspiration following this guilt, recalling the famous
+      livestream <a href="https://www.twitch.tv/twitchplayspokemon"
+        >TwitchPlaysPokemon</a
+      > I immediately got to work wiring him up to an arduino I had laying around.
+    </p>
+    <p>
+      Soon after cracking open CircuitPython I had working button inputs from my
+      computer over a serial connection :), and by making use of an IRC library
+      I had previously written for another project I threw together a bot that
+      would listen for commands in chat. These commands would then be sent off
+      to the arduino. I threw him in a box with a light, stuck a webcam to the
+      side and started streaming.
+    </p>
+    <p>
+      I didn't feel he was content in this tiny box so I built him a larger
+      habitat. I made a trip to the dollar store to pick up some things he might
+      like, a buddha statue, moss, bristle board, cotton balls, and string
+      lights. Felix helped me out with putting it all together in a bigger box I
+      found in the storage room.
+    </p>
+    <p>
+      I felt we were both happy but I grew frustrated with Twitch as it was too
+      limiting. For one, users cannot send the same message twice in a row,
+      making this whole thing pretty much useless. I also dislike the direction
+      Twitch is taking with their content policies, so I decided he'd be better
+      off here.
+    </p>
+    <p>
+      Keeping him on here comes with several advantages, such as being able to
+      build a proper UI, lower latency video, not dealing with the limitations
+      of Twitch chat, and bringing me some more traffic.
+    </p>
+  </blockquote>
+</Project>

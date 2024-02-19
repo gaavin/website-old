@@ -24,7 +24,12 @@ export const GET: APIRoute = async ({ request }) => {
       const keepAliveInterval = setInterval(() => {
         if (clients.some((client) => client.id === clientId)) {
           const keepAliveMessage = new TextEncoder().encode(":keepalive\n\n");
-          controller.enqueue(keepAliveMessage);
+          try {
+            controller.enqueue(keepAliveMessage);
+          } catch (error) {
+            console.error(error);
+            clearInterval(keepAliveInterval);
+          }
         } else {
           clearInterval(keepAliveInterval);
         }

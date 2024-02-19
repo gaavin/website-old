@@ -1,0 +1,62 @@
+---
+import Project from "@/components/Project.astro";
+import registration from "./registration.png";
+import businesses from "./businesses.png";
+import report from "./report.png";
+---
+
+<Project
+  title="Clear Carbon Solutions"
+  images={[
+    { image: registration, alt: "Registration Page" },
+    { image: businesses, alt: "Businesses Tab" },
+    { image: report, alt: "Final Report" },
+  ]}
+>
+  <p>
+    With my colleagues Will and Matt, we are working to build a platform for
+    businesses and municipalities to keep track of carbon emissions. We will
+    provide value to our clients by allowing them use already on hand data to
+    generate a carbon report via our "turbo-tax style" interface. We'll also be
+    giving feedback on how they reduce their emissions - ultimately reducing
+    operating costs and environmental impact. Through working with the Genesis
+    Center we've received a great deal of validation and support, we're excited
+    to get customers on board!
+  </p>
+  <p>
+    My role in the project being the one and only full-stack developer has been
+    quite the learning experience. As my first real deep dive into the modern
+    web (since piczo in 2007), I took the opportunity to learn how it has
+    evolved, working up a flask/jquery frontend with FastAPI backend, to
+    exploring GraphQL for type-safe interoperability between the client and
+    server, and finally ending up in React land where things got interesting
+    quickly.
+  </p>
+  <blockquote class="ramble">
+    <p>
+      React seemed to be a fantastic alternative to the HTML/jQuery soup I was
+      scaffolding with, which I knew was unmaintable. I got to work reading
+      through documentation, asking questions (thanks <a
+        href="https://jackharrhy.dev/">Jack ❤️</a
+      >), and began ported over my existing frontend to a React, with the soon
+      to be underdog React Router to create an SPA (far better than jinja
+      template SSR).
+    </p>
+    <p>
+      At this point I was satisfied with both stacks, with GraphQL covering
+      interoperability using two excellent libraries Tanstack-Query for the
+      frontend and Strawberry putting on the server side of things. This
+      probably should have been good enough, but as my understanding of the
+      React Router grew, I knew I could do better.
+    </p>
+    <p>
+      Remix.js, a superset of React Router which bundles a simple Node SSR
+      server takes routing and applies the concept of hydration. This means that
+      to achieve full-stack data flow, all you have to do is create a loader (or
+      action for data mutation) function which is ran when the router navigates
+      to a new page. I am now quite happy now to be working within a single
+      codebase, and with Remix's continuous evolevement I can't wait to
+      implement all of their new features.
+    </p>
+  </blockquote>
+</Project>
