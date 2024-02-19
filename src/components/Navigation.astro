@@ -1,6 +1,20 @@
+---
+const currentPage = new URL(Astro.request.url).pathname.replace(/\//g, "");
+---
+
 <ul class="text-2xl">
-  <li><a href="/">About</a></li>
-  <li><a href="/projects/">Projects</a></li>
-  <li><a href="/resume/">Resume</a></li>
-  <li><a href="https://github.com/gaavin/">Github</a></li>
+  <li class={currentPage === "" ? "active" : ""}><a href="/">About</a></li>
+  <li class={currentPage === "projects" ? "active" : ""}>
+    <a href="/projects/">Projects</a>
+  </li>
+  <li class={currentPage === "resume" ? "active" : ""}>
+    <a href="/resume/">Resume</a>
+  </li>
+  <li class=""><a href="https://github.com/gaavin/">Github</a></li>
 </ul>
+
+<style>
+  .active {
+    font-weight: bold;
+  }
+</style>
