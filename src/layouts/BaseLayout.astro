@@ -26,11 +26,9 @@ const { title } = Astro.props;
         <slot />
       </main>
     </div>
-    {
-      //<div class="tama">
-      //<Tama client:only="react" transition:persist />
-      //</div>
-    }
+    <div class="tama">
+      <Tama client:only="react" transition:persist />
+    </div>
     <style>
       :root {
         font-size: 22px;
