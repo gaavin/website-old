@@ -21,7 +21,7 @@ export const Tama = () => {
         </button>
         <div className="stream-container">
           <ReactPlayer
-            url="http://live.gavinpower.dev:59212/live"
+            url="http://live.gavinpower.dev:8889/live"
             controls={false}
             playing={true}
             muted={isMuted}
